@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FITAnnouncementsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="FITAnnouncementsModelStoreContainer">
+          <EntitySet Name="Announcement" EntityType="FITAnnouncementsModel.Store.Announcement" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="News" EntityType="FITAnnouncementsModel.Store.News" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="FITAnnouncementsModel.Store.User" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Announcement">
+          <Key>
+            <PropertyRef Name="Announcement_ID" />
+          </Key>
+          <Property Name="Announcement_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="Icon" Type="varbinary(max)" />
+          <Property Name="Expiry" Type="datetime" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Expired" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Optional" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="News_ID" />
+          </Key>
+          <Property Name="News_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Expiry" Type="datetime" />
+          <Property Name="Expired" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Optional" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Username" Type="nvarchar" MaxLength="250" />
+          <Property Name="Password" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FITAnnouncementsModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="DBEntities">
+          <EntitySet Name="User" EntityType="FITAnnouncementsModel.User" />
+          <EntitySet Name="Announcement" EntityType="FITAnnouncementsModel.Announcement" />
+          <EntitySet Name="News" EntityType="FITAnnouncementsModel.News" />
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Type="Int32" Name="User_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Surname" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Username" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsDeleted" />
+        </EntityType>
+        <EntityType Name="Announcement">
+          <Key>
+            <PropertyRef Name="Announcement_ID" />
+          </Key>
+          <Property Type="Int32" Name="Announcement_ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Title" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="Image" MaxLength="Max" FixedLength="false" />
+          <Property Type="Binary" Name="Icon" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="Expiry" />
+          <Property Type="DateTime" Name="Created" />
+          <Property Type="Boolean" Name="Expired" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <Property Type="String" Name="Optional" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="News_ID" />
+          </Key>
+          <Property Type="Int32" Name="News_ID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Text" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Created" />
+          <Property Type="DateTime" Name="Expiry" />
+          <Property Type="Boolean" Name="Expired" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <Property Type="String" Name="Optional" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FITAnnouncementsModelStoreContainer" CdmEntityContainer="DBEntities">
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="FITAnnouncementsModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Announcement">
+            <EntityTypeMapping TypeName="FITAnnouncementsModel.Announcement">
+              <MappingFragment StoreEntitySet="Announcement">
+                <ScalarProperty Name="Optional" ColumnName="Optional" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Expired" ColumnName="Expired" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Expiry" ColumnName="Expiry" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Announcement_ID" ColumnName="Announcement_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="FITAnnouncementsModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="Optional" ColumnName="Optional" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Expired" ColumnName="Expired" />
+                <ScalarProperty Name="Expiry" ColumnName="Expiry" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="News_ID" ColumnName="News_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="DBModel">
+        <EntityTypeShape EntityType="FITAnnouncementsModel.User" Width="1.5" PointX="4.5" PointY="0.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="FITAnnouncementsModel.Announcement" Width="1.75" PointX="0.75" PointY="0.5" Height="2.9417936197916665" IsExpanded="true" />
+        <EntityTypeShape EntityType="FITAnnouncementsModel.News" Width="1.5" PointX="2.625" PointY="0.625" Height="2.3648893229166656" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

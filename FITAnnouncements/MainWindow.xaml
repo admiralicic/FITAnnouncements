@@ -1,0 +1,39 @@
+﻿<Window x:Class="FITAnnouncements.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:cust="clr-namespace:Controls;assembly=Controls"
+        xmlns:local="clr-namespace:FITAnnouncements"
+        xmlns:view="clr-namespace:FITAnnouncements.Views"
+        xmlns:vm="clr-namespace:FITAnnouncements.ViewModels"
+        Title="FIT Obavijesti" Height="350" Width="525" WindowStyle="None" WindowState="Maximized" MouseUp="Window_MouseUp" Padding="60" >
+    <Window.Resources>        
+        <DataTemplate DataType="{x:Type local:FITNewsViewModel}">
+            <view:MyNewsTickerView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MyContentViewModel}">
+            <view:MyContentView />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Background="#EEEEEE">
+        <Grid.RowDefinitions>            
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />            
+        </Grid.RowDefinitions>        
+        <cust:AnimatedContentControl Name="Announcement" 
+                                     Content="{Binding Content}" 
+                                     Grid.Row="0"
+                                     Margin="10,5,0,5"/>
+        <cust:NewsTicker x:Name="contentTicker" 
+                         Grid.Row="1" 
+                         HorizontalAlignment="Stretch" 
+                         VerticalAlignment="Center" 
+                         Margin="0,0,0,5" 
+                         Height="43"
+                         Rate="20" Direction="West" 
+                         Content="{Binding Vijesti}"
+                         Background="#FF9900">
+                       
+        </cust:NewsTicker>
+        
+    </Grid>
+</Window>

@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="FITAnnouncements.Views.MyContentView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:conv="clr-namespace:FITAnnouncements.Converters"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="300" d:DesignWidth="516" Margin="0" MaxHeight="{Binding ElementName=contentGrid, Path=ActualHeight}">
+    <UserControl.Resources>
+        <conv:BinaryImageConverter x:Key="imageConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">        
+        <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Name="titleArea" 
+                        Orientation="Horizontal" 
+                        Grid.Row="0"
+                        Background="#689CD2">
+                <Image Source="{Binding Path=Icon, Converter={StaticResource imageConverter}}" 
+                       MaxWidth="80" 
+                       MaxHeight="80" 
+                       Margin="20" 
+                       Stretch="Uniform" 
+                       StretchDirection="Both"
+                       >
+                </Image>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Title, FallbackValue=TITLE}" 	
+                   TextWrapping="Wrap"
+				   TextAlignment="Left"
+                   FontFamily="Segoe"
+				   FontSize="36" 
+				   FontWeight="Normal"
+                   FontStyle="Normal"
+                   Foreground="#5A5A5A"
+                   Margin="20,5,20,0" 
+                   Padding="5,20,5,5"/>
+                    <TextBlock Text="{Binding DatumObjave, StringFormat='Datum objave: {0:dd/MM/yyyy HH:mm}'}" TextAlignment="Left"
+                   FontFamily="Segoe"
+				   FontSize="28" 
+				   FontWeight="Light"
+                   FontStyle="Italic"
+                   Foreground="#5A5A5A"
+                   Margin="20,0,20,20" 
+                   Padding="5"
+                               VerticalAlignment="Top"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding AnnouncementText, FallbackValue=ANNOUCEMENTTEXT}"
+                           TextWrapping="Wrap"
+				           TextAlignment="Justify"
+                           FontFamily="Segoe"
+				           FontSize="20" 
+				           FontWeight="Normal"
+                           Margin="20" 
+                           Padding="10"
+                           Foreground="#5A5A5A"
+                           Grid.Column="0"/>
+                <Image Source="{Binding Path=Image, Converter={StaticResource imageConverter}}"
+                       Margin="10" 
+                       Stretch="Uniform"  
+                       StretchDirection="DownOnly"
+                       HorizontalAlignment="Center"
+                       Grid.Column="1"
+                       />
+            </Grid>
+        </Grid>
+        <!--<Border x:Name="borderSeparator" 
+                Grid.Column="1" 
+                Background="#216477" 
+                BorderThickness="1"
+                CornerRadius="0,5,5,0" 
+                BorderBrush="#216477" 
+                Width="10" 
+                Margin="0"
+                Opacity="0">
+            
+        </Border>-->
+    </Grid>
+</UserControl>
